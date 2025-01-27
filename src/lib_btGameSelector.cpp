@@ -214,25 +214,20 @@ void    Game::setPeriodAndLanguage(bool update){
 
 Game::GameUID Game::getGameUID(){
     GameUID Uid{0};
-    uint32_t tmp;
-
+    
     if (this->isGameValid() == false) throw std::logic_error("Game is not valid.");
 
-    tmp = std::to_underlying(this->getMainCategory());
-    tmp <<=24;
-    Uid += tmp;
+    Uid = std::to_underlying(this->getMainCategory());
+    Uid <<= 8;
+    
+    Uid += std::to_underlying(this->getSubCategory());
+    Uid <<= 8;
 
-    tmp = std::to_underlying(this->getSubCategory());
-    tmp <<=16;
-    Uid += tmp;
+    Uid += std::to_underlying(this->getPeriod());
+    Uid <<= 8;
 
-    tmp = std::to_underlying(this->getPeriod());
-    tmp <<=8;
-    Uid += tmp;
-
-    tmp = std::to_underlying(this->getLangue());
-    Uid += tmp;
-
+    Uid += std::to_underlying(this->getLangue());
+    
     return Uid;
 }
 
