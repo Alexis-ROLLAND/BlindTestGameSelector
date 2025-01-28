@@ -1,34 +1,22 @@
 #include <cstdlib>
 #include <print>
 
-#include "lib_btGameSelector.hpp"
+#include "Game.hpp"
 
 int main(){
+    bool res;
+    Game myGame{};
 
-    Game    myGame;
+    myGame.printInfo();
 
-    /*
-    std::println("Main Category = {0:}", Game::toString(myGame.getMainCategory()));
-    std::println("Sub Category = {0:}", Game::toString(myGame.getSubCategory()));
-    std::println("Periode = {0:}", Game::toString(myGame.getPeriod()));
-    std::println("Langue = {0:}", Game::toString(myGame.getLangue()));
-    */
+    myGame.ChooseMainCategory(MainCategoryID::SPECIAL_GAME);
 
-    myGame.setMainCategory();
-    std::println("Main Category = {0:}", Game::toString(myGame.getMainCategory()));
+    myGame.printInfo();
 
-    myGame.setSubCategory();
-    std::println("Sub Category = {0:}", Game::toString(myGame.getSubCategory()));
+    res = myGame.ChooseSubCategory(SubCategoryID::BURGER_MORT);
+    std::println("res = {0:}", res);
 
-    myGame.setPeriodAndLanguage();
-    std::println("Periode = {0:}", Game::toString(myGame.getPeriod()));
-    std::println("Langue = {0:}", Game::toString(myGame.getLangue()));
-    
-    std::println("Uid = {0:08x}",myGame.getGameUID());
-
-    myGame.CreateGame();
-    std::println("Uid = {0:08x}",myGame.getGameUID());
-    
+    myGame.printInfo();
 
 
     return EXIT_SUCCESS;

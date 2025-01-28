@@ -40,8 +40,13 @@ include_directories(include)
 
 # main executable : cmake --build . -t btGameSelectorTest
 add_executable(btGameSelectorTest   src/btGameSelector_test.cpp
-                                    src/lib_btGameSelector.cpp
+                                    src/Game.cpp
+                                    src/btMainCategory.cpp
+                                    src/btSubCategory.cpp
+                                    src/btPeriod.cpp
+                                    src/btLanguage.cpp
                                     )
+
 
 
 
