@@ -23,7 +23,7 @@ class   btLanguage{
         
         std::string_view    to_string() const noexcept {return ListLanguages.at(this->getID());};
         void    reset() noexcept {this->setID(LanguageID::X);};
-       
+        bool    isSet() const noexcept {return (this->getID() == LanguageID::X)?false:true;};
 };
 
 

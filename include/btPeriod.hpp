@@ -24,7 +24,7 @@ class   btPeriod{
         
         std::string_view    to_string() const noexcept {return ListPeriods.at(this->getID());};
         void    reset() noexcept {this->setID(PeriodID::X);};
-        
+        bool    isSet() const noexcept {return (this->getID() == PeriodID::X)?false:true;};
 };
 
 

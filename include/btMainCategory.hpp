@@ -12,9 +12,7 @@ class   btMainCategory{
     public:
         
     private:
-        
-
-        
+                
         MainCategoryID  Id{MainCategoryID::X};
     public:
         btMainCategory() = default;
@@ -26,6 +24,7 @@ class   btMainCategory{
         
         std::string_view    to_string() const noexcept {return ListMainCategories.at(this->getID());};
         void    reset() noexcept {this->setID(MainCategoryID::X);};
+        bool    isSet() const noexcept {return (this->getID() == MainCategoryID::X)?false:true;};
 
         std::unordered_set<SubCategoryID>   getListAllowedSubCategories() noexcept {return ListAllowedSubCategories.at(this->getID());};
 

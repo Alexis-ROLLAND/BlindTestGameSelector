@@ -6,16 +6,24 @@
 #include <unordered_set>
 #include <string_view>
 
-using   FilterCriteria = std::pair<bool,bool>;        /** first = period, second = langauge */
+/*---------------------------------------------------------------------------*/
+using   FilterCriteria = std::pair<bool,bool>;        /** first = period, second = language */
+/*---------------------------------------------------------------------------*/
 
+/*---------------------------------------------------------------------------*/
+/**
+ * @brief   Possible IDs for main categories
+ */
 enum class MainCategoryID{
-    X = 0,
-    TRAD_GAME = 1,
-    EXTRA_GAME = 2,
-    SPECIAL_GAME = 3,
-    NA = 4
+    X = 0,                      /**< Uninitialized */
+    TRAD_GAME = 1,              /**< Traditional game */
+    EXTRA_GAME = 2,             /**< Extra game (Movie, TV show..) */
+    SPECIAL_GAME = 3,           /**< Special game (Petit bac, burger de la mort...) */
+    NA = 4                      /**< Not Applicable - Should never be assgned to this value - Main category is always applicable */
 };
-
+/**
+ * @brief   Possible IDs for sub categories
+ */
 enum class SubCategoryID{
     X = 0,
     TRADITIONAL = 1,
@@ -36,6 +44,9 @@ enum class SubCategoryID{
     NA = 16
 };
 
+/**
+ * @brief   Possible IDs for Periods
+ */
 enum class PeriodID{    
     X = 0,          /**< Non initialisé         */ 
     OLDIES = 1,     /**< Avant 1970 (DATE < 1970) */
@@ -48,13 +59,21 @@ enum class PeriodID{
     NA = 8          /**< Valeur Non Applicable (pas prise en compte par le jeu) */
 };
 
+/**
+ * @brief   Possible IDs for main Languages
+ */
 enum class LanguageID{  
     X = 0,          /**< Non initialisé         */ 
     FRA = 1,        /**< FRAnçais */
     INT = 2,        /**< INTernational */
     NA = 3         /**< Valeur Non Applicable (pas prise en compte par le jeu) */
 };
+/*---------------------------------------------------------------------------*/
 
+/*---------------------------------------------------------------------------*/
+/**
+ * @brief   Lists of values and associated texts 
+ */
 const   std::unordered_map<MainCategoryID,std::string_view> ListMainCategories{ 
     {MainCategoryID::X,"X"},
     {MainCategoryID::TRAD_GAME,"TRAD GAME"},
@@ -82,25 +101,6 @@ const   std::unordered_map<SubCategoryID,std::string_view> ListSubCategories{
     {SubCategoryID::NA,"NOT APPLICABLE"}
 };   
 
-const   std::unordered_map<SubCategoryID,FilterCriteria> ListFIlterCriteria{
-    {SubCategoryID::X,{false,false}},
-    {SubCategoryID::TRADITIONAL,{true,true}},
-    {SubCategoryID::MOVIE,{true,false}},
-    {SubCategoryID::TV_SHOW,{true,false}},
-    {SubCategoryID::COVER,{false,true}},
-    {SubCategoryID::DUET,{true,true}},
-    {SubCategoryID::CHORUS,{false,false}},
-    {SubCategoryID::RIFF,{false,false}},
-    {SubCategoryID::NAMES,{false,true}},
-    {SubCategoryID::CITIES,{false,true}}, 
-    {SubCategoryID::PETIT_BAC,{false,true}},
-    {SubCategoryID::BURGER_MORT,{false,true}},
-    {SubCategoryID::TIROIRS,{false,false}},
-    {SubCategoryID::MIME,{false,false}},
-    {SubCategoryID::TABOO,{false,false}},  
-    {SubCategoryID::NA,{false,false}}      
-};
-
 const   std::unordered_map<PeriodID,std::string_view> ListPeriods{
     {PeriodID::X,"X"},
     {PeriodID::OLDIES,"OLDIES"},
@@ -119,7 +119,39 @@ const   std::unordered_map<LanguageID,std::string_view> ListLanguages{
     {LanguageID::INT,"INT"},
     {LanguageID::NA,"NOT APPLICABLE"},
 };
+/*---------------------------------------------------------------------------*/
 
+/*---------------------------------------------------------------------------*/
+/**
+ * @brief   Map intended to associate filters criteria (Period / Language) to
+ *          a given sub category
+ * @attention   the type FilterCriteria is a std::pair<bool,bool>
+ *                  The first element is for the Period
+ *                  The second element is for the Language  
+ */
+const   std::unordered_map<SubCategoryID,FilterCriteria> ListFilterCriteria{
+    {SubCategoryID::X,{false,false}},
+    {SubCategoryID::TRADITIONAL,{true,true}},
+    {SubCategoryID::MOVIE,{true,false}},
+    {SubCategoryID::TV_SHOW,{true,false}},
+    {SubCategoryID::COVER,{false,true}},
+    {SubCategoryID::DUET,{true,true}},
+    {SubCategoryID::CHORUS,{false,false}},
+    {SubCategoryID::RIFF,{false,false}},
+    {SubCategoryID::NAMES,{false,true}},
+    {SubCategoryID::CITIES,{false,true}}, 
+    {SubCategoryID::PETIT_BAC,{false,true}},
+    {SubCategoryID::BURGER_MORT,{false,true}},
+    {SubCategoryID::TIROIRS,{false,false}},
+    {SubCategoryID::MIME,{false,false}},
+    {SubCategoryID::TABOO,{false,false}},  
+    {SubCategoryID::NA,{false,false}}      
+};
+
+
+/**
+ * @brief   List of allowed sub-categories from a main category
+ */
 const   std::unordered_set<SubCategoryID>   allowed_sub_Main_X{SubCategoryID::X};
 const   std::unordered_set<SubCategoryID>   allowed_sub_Main_Trad{SubCategoryID::TRADITIONAL};
 const   std::unordered_set<SubCategoryID>   allowed_sub_Main_Extra{ SubCategoryID::MOVIE, 
@@ -138,6 +170,9 @@ const   std::unordered_set<SubCategoryID>   allowed_sub_Main_Special{   SubCateg
                                                                         SubCategoryID::TABOO};
 const   std::unordered_set<SubCategoryID>   allowed_sub_Main_NA{SubCategoryID::NA};   
 
+/**
+ * @brief   Map intended to associate a main category ID to the related allowed sub-categories
+ */
 const   std::unordered_map<MainCategoryID,std::unordered_set<SubCategoryID>> ListAllowedSubCategories{
                                                                                         {MainCategoryID::X, allowed_sub_Main_X},
                                                                                         {MainCategoryID::TRAD_GAME, allowed_sub_Main_Trad},
