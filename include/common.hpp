@@ -56,7 +56,7 @@ enum class PeriodID{
     Y2K0X = 5,      /**< DATE entre 2000 et 2009 */
     Y2K1X = 6,      /**< DATE entre 2010 et 2019 */
     Y2K2X = 7,      /**< DATE entre 2020 et 2029 */ 
-    NA = 8          /**< Valeur Non Applicable (pas prise en compte par le jeu) */
+    NA = 8          /**< Valeur Non Applicable - Should never be assgned to this value - Sub category is always applicable */
 };
 
 /**

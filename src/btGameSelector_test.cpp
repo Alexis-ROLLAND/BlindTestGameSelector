@@ -9,31 +9,46 @@ int main(){
 
     myGame.printInfo();
 
-    myGame.ChoosePeriod(PeriodID::SEVENTIES,true);
-    myGame.ChooseLanguage(LanguageID::INT,true);
-    myGame.printInfo();
+    res = myGame.isGameOK();
+    std::println("  Game.isGameOK = {0:}",res);
 
-    myGame.Reset();
+    
+    res = myGame.setRandomMainCategory();
 
-    myGame.ChooseMainCategory(MainCategoryID::SPECIAL_GAME);
+    if (res) myGame.printInfo();
+    else std::println("Error while setting random main category");
 
-    myGame.printInfo();
+    res = myGame.isGameOK();
+    std::println("  Game.isGameOK = {0:}",res);
 
-    res = myGame.ChooseSubCategory(SubCategoryID::BURGER_MORT);
-    std::println("res = {0:}", res);
+    res = myGame.setRandomSubCategory();
+    if (res) myGame.printInfo();
+    else std::println("Error while setting random sub category");
 
-    myGame.printInfo();
+    res = myGame.isGameOK();
+    std::println("  Game.isGameOK = {0:}",res);
 
-    myGame.ChooseSubCategory(SubCategoryID::COVER,true);
-    myGame.printInfo();
+    res = myGame.setRandomPeriod();
+    if (res) myGame.printInfo();
+    else std::println("Error while setting random Period");
 
-    res = myGame.ChoosePeriod(PeriodID::NA);
-    //std::println(" # res = {0:}",res);
-    myGame.printInfo();
+    res = myGame.isGameOK();
+    std::println("  Game.isGameOK = {0:}",res);
 
-    res = myGame.ChooseLanguage(LanguageID::FRA);
-    //std::println(" # res = {0:}",res);
-    myGame.printInfo();
+    res = myGame.setRandomLanguage();
+    if (res) myGame.printInfo();
+    else std::println("Error while setting random Language");
+
+    res = myGame.isGameOK();
+    std::println("  Game.isGameOK = {0:}",res);
+
+    res = myGame.makeFullRandomGame();
+    if (res) myGame.printInfo();
+    else std::println("Error while making full random game");
+    
+    res = myGame.isGameOK();
+    std::println("  Game.isGameOK = {0:}",res);
+    
 
     return EXIT_SUCCESS;
 }
