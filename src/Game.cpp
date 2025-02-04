@@ -219,17 +219,19 @@ bool    Game::fillWithRandom(){
     if (this->SubCategory.getID() == SubCategoryID::NA) return false;
 
     if (this->SubCategory.isSet() == false){                            /** Subcategory is unset */
-
+        this->setRandomSubCategory(!this->MainCategory.isSet());         /** Random SubCategory, according to main category status */
 
 
     }
     else{                                                               /** Subcategory is already set */
-        if (this->MainCategory.isSet() == false)    this->ChooseMainCategory(this->getMainCategoryID(this->SubCategory.getID()) );
-
+        if (this->MainCategory.isSet() == false)    this->ChooseMainCategory(this->getMainCategoryID(this->SubCategory.getID()) ); /** Fill Main Category according to sub category */
+        
     }
 
+    if (this->Period.isSet() == false) this->setRandomPeriod();
+    if (this->Language.isSet() == false) this->setRandomLanguage();
 
-    return true;
+    return this->isGameOK();
 }
 /*---------------------------------------------------------------------------*/
 void    Game::printInfo() noexcept{

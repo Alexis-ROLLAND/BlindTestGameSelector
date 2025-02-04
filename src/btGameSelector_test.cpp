@@ -49,6 +49,16 @@ int main(){
     res = myGame.isGameOK();
     std::println("  Game.isGameOK = {0:}",res);
     
+    std::println("-----------------------------------------------------");
+    myGame.Reset();
+
+    res = myGame.ChooseMainCategory(MainCategoryID::SPECIAL_GAME);
+    if (res) myGame.printInfo();
+    else std::println("Error while setting main category");
+
+    res = myGame.fillWithRandom();
+    if (res) myGame.printInfo();
+    else std::println("Error while filling randomly");
 
     return EXIT_SUCCESS;
 }
